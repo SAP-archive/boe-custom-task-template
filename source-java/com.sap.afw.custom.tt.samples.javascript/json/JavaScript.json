@@ -1,0 +1,107 @@
+{
+  "name": "JavaScript",
+  "cuid": "AXNV4DUVcjVFvnWKYYprI20",
+  "specific_kind": "tt.customScript",
+  "parent_id": "",
+  "task_template": {
+    "display_name": "JavaScript",
+    "input_param": [
+      {
+        "display_name": "Session",
+        "name": "sessiontoken",
+        "default_value": "",
+        "type": "token",
+        "mandatory": true,
+		"description":"Session on the Central Management Server created with Logon to the selected Landscape",
+        "ux_control": {
+          "type": "combobox",
+		  "visible": false,
+          "lov": [],
+          "lov_source": "prev_task_param",
+          "place_holder": "Select session"
+        }
+      },
+      {
+        "display_name": "Script",
+        "name": "script",
+        "default_value": "",
+        "type": "csv",
+        "type_info": "id;cuid",
+        "mandatory": true,
+        "description": "Script to execute. CSV format: id;<id1> or cuid;<cuid1>",
+        "ux_control": {
+          "type": "repoexplorer",
+		   "repoexplorer_property":{
+			 "filter_kind": ["Agnostic"],
+			 "selection_mode": "single" 
+		 	},
+          "place_holder": "Enter script"
+        }
+      },
+      {
+        "display_name": "InfoObjects",
+        "name": "infoobjects",
+        "default_value": "",
+        "type": "csv",
+        "type_info": "id;cuid",
+        "mandatory": false,
+        "description": "CSV values for InfoObjects to work on. CSV format: id;<id1>;<id2>;... or cuid;<cuid1>;<cuid2>;...",
+        "ux_control": {
+          "type": "repoexplorer",
+		   "repoexplorer_property":{
+			 "filter_kind": [],
+			 "selection_mode": "multi" 
+		 	},
+          "place_holder": "Enter InfoObjects"
+        }
+      },
+      {
+        "display_name": "Parameter & Value",
+        "name": "parameter_value",
+        "default_value": "",
+        "type": "csv",
+        "type_info": "", 
+        "mandatory": false,
+        "description": "CSV values with parameters and value, for example: 'par1,<par2>,...;value1,<value2>,...;'.",
+		"ux_control": {
+          "type": "textbox",
+          "place_holder": "Enter the parameter(s) and parameter value(s)"
+        }
+      }
+    ],
+    "output_param": [
+      {
+        "display_name": "Success",
+        "name": "success_list",
+        "type": "csv",
+        "type_info": "id,cuid",
+        "description": "InfoObjects successfully processed. CSV format: id,cuid;<id1><cuid1>;<id2><cuid2>;..."
+      },
+      {
+        "display_name": "Failure",
+        "name": "failure_list",
+        "type": "csv",
+        "type_info": "id,cuid",
+        "description": "InfoObjects failed to process. CSV format: id,cuid;<id1><cuid1>;<id2><cuid2>;..."
+      },
+	  {
+        "display_name": "All",
+        "name": "all",
+        "type": "csv",
+        "type_info": "id,cuid",
+        "description": "All InfoObjects processed. CSV format: id,cuid;<id1><cuid1>;<id2><cuid2>;..."
+      }
+    ],
+    "param_uifile": "",
+    "executable_jarname": {
+      "path": ""
+    },
+    "system_requirement": {
+      "type": "none"
+    },
+    "multiple_execution": false,
+    "help": {
+      "description": "Execute a custom script"
+    }
+  }
+}

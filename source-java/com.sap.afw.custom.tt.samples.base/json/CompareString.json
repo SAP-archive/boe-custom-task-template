@@ -1,0 +1,72 @@
+{
+  "name": "Compare String",
+  "cuid": "AeHX5lsgb1ZKkMR7KnAHnhg",
+  "specific_kind": "tt.sample",
+  "parent_id": "",
+  "task_template": {
+    "display_name": "Compare String",
+    "input_param": [
+      {
+        "display_name": "Source",
+        "name": "source",
+        "default_value": "",
+        "type": "csv",
+        "type_info": "",
+        "mandatory": true,
+		"description": "CSV values or String to compare",
+		"ux_control": {
+          "type": "textbox",
+          "place_holder": "Enter CSV reference"
+        }
+      },
+      {
+        "display_name": "Target",
+        "name": "target",
+        "default_value": "",
+        "type": "csv",
+        "type_info": "",
+        "mandatory": true,
+		"description": "CSV values or String to compare",
+		"ux_control": {
+          "type": "textbox",
+          "place_holder": "Enter CSV reference"
+        }
+      },
+      {
+        "display_name": "Success on",
+        "name": "compare_condition",
+        "default_value": "not equal",
+        "type": "string",
+        "mandatory": true,
+        "description": "Define on which compare result the status should be set to success: 'equal' or 'not equal'",
+        "ux_control": {
+          "type": "combobox",
+          "lov": [
+            {
+              "value": "not_equal",
+              "display_name": "Not equal"
+            },
+            {
+              "value": "equal",
+              "display_name": "Equal"
+            }
+          ],
+          "lov_source": "static",
+          "place_holder": "compare_condition"
+        }
+      }
+    ],
+   "output_param": [],
+    "param_uifile": "",
+    "executable_jarname": {
+      "path": ""
+    },
+    "system_requirement": {
+      "type": "cms"
+    },
+    "multiple_execution": false,
+    "help": {
+      "description": "Simple text compare"
+    }
+  }
+}

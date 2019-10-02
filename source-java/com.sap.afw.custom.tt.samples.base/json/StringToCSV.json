@@ -1,0 +1,44 @@
+{
+  "name": "Convert String to CSV",
+  "cuid": "AZfXotX9F_1Doc8pYCiKrf4",
+  "specific_kind": "tt.sample",
+  "parent_id": "",
+  "task_template": {
+    "display_name": "Convert String to CSV",
+    "input_param": [
+      {
+        "display_name": "String",
+        "name": "string_input",
+        "default_value": "",
+        "type": "string",
+        "type_info": "id",
+        "mandatory": true,
+        "description": "enter String in CSV format: id;<id1>;<id2>;... or cuid;<cuid1>;<cuid2>;...",
+        "ux_control": {
+          "type": "textbox",
+          "place_holder": "Enter value"
+        }
+      }
+    ],
+    "output_param": [
+      {
+        "display_name": "CSV output",
+        "name": "csv_output",
+        "type": "csv",
+        "type_info": "",
+        "description": "Converted String as CSV"
+      }
+    ],
+    "param_uifile": "",
+    "executable_jarname": {
+      "path": ""
+    },
+    "system_requirement": {
+      "type": "none"
+    },
+    "multiple_execution": false,
+    "help": {
+      "description": "Convert type of input parameter (String) to output parameter (CSV), value is unchanged. Bypass limitation of input parameters using the Repository Explorer (not possible to enter CSV values manually). Enter the values here and use the output of this TT as input in the other TT."
+    }
+  }
+}

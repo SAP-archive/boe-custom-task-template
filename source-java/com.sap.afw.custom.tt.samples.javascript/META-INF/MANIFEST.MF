@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Custom Task Template - Samples - JavaScript
+Bundle-SymbolicName: com.sap.afw.custom.tt.samples.javascript
+Bundle-Version: 1.0.0
+Bundle-Activator: com.sap.afw.task.Activator
+Bundle-Vendor: SAP
+Import-Package: com.businessobjects.foundation.logging,
+ com.crystaldecisions.sdk.exception,
+ com.crystaldecisions.sdk.framework,
+ com.crystaldecisions.sdk.occa.infostore,
+ com.crystaldecisions.sdk.plugin.authentication.enterprise,
+ com.sap.afw.helper,
+ org.json,
+ org.osgi.framework;version="1.3.0"
+Require-Bundle: com.sap.bong.common.coretask;bundle-version="1.0.0",
+ com.sap.bong.task.custom.sdk;bundle-version="1.0.0",
+ com.businessobjects.boesdk;bundle-version="1.0.0"

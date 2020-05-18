@@ -13,6 +13,7 @@ package com.sap.afw.task;
 import com.sap.afw.task.compare.CompareTemplate;
 import com.sap.afw.task.convert.StringToCSVTemplate;
 import com.sap.afw.task.webi.WebiGetDatasetTemplate;
+import com.sap.afw.task.webi.WebiGetDatasetWorklistTemplate;
 import com.sap.bong.task.custom.sdk.CustomTaskPluginActivator;
 
 public class Activator extends CustomTaskPluginActivator {
@@ -21,6 +22,7 @@ public class Activator extends CustomTaskPluginActivator {
 	public void registerPluginTaskTemplates() throws Exception {
 		registerTaskTemplate(new StringToCSVTemplate());
 		registerTaskTemplate(new WebiGetDatasetTemplate());
+		registerTaskTemplate(new WebiGetDatasetWorklistTemplate());
 		registerTaskTemplate(new CompareTemplate());
 	}
 }

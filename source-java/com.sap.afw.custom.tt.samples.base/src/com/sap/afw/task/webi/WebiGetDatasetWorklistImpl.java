@@ -19,23 +19,23 @@ import com.sap.bong.common.coretask.base.ITaskOutputValue;
 import com.sap.bong.task.custom.sdk.CustomTaskImpl;
 import com.sap.bong.task.custom.sdk.CustomTaskTemplate;
 
-public class WebiGetDatasetImpl extends CustomTaskImpl {
+public class WebiGetDatasetWorklistImpl extends CustomTaskImpl {
 
-	private static final ILogger LOG = LoggerManager.getLogger(WebiGetDatasetImpl.class);
-
-	private WebiGetDatasetHelper helper;
-
-	public WebiGetDatasetImpl(CustomTaskTemplate taskTemplate) {
+	private static final ILogger LOG = LoggerManager.getLogger(WebiGetDatasetWorklistImpl.class);
+			
+	public WebiGetDatasetWorklistImpl(CustomTaskTemplate taskTemplate) {
 		super(taskTemplate);
 	}
 
+	private WebiGetDatasetHelper helper;
 
 	@Override
 	public TASK_STATUS execute() {
 		
 		try {
-			helper = new WebiGetDatasetHelper(this, false);
+			helper = new WebiGetDatasetHelper(this, true);
 			return helper.workOnReportTable();
+
 		} catch (Exception e) {
 			LOG.error(e);
 			return TASK_STATUS.failure;
@@ -69,8 +69,6 @@ public class WebiGetDatasetImpl extends CustomTaskImpl {
 
 	@Override
 	public String resultDetails() {
-		// use CR LF to start new line
-		//return "col1,col2,col3\r\n,v11,v12,v13\r\n,v21,v22,v23";
 		return helper.getCsvOutput(); //resultDetails;
 	}
 }

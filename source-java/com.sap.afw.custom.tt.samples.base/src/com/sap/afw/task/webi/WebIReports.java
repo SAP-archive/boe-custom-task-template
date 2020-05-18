@@ -74,15 +74,25 @@ public class WebIReports  {
         return resultSet;
     }
     
-    public Map<Integer, JSONObject> requestReportElementDataset(int docId, int reportId, int elementId) throws Exception {
-    	Map<Integer, JSONObject> resultSet = new HashMap<Integer, JSONObject>();
-
+    public JSONObject requestReportElementDataset(int docId, int reportId, int elementId) throws Exception {
         JSONObject document = rest.sendRequestJSON(rest.getWEBI_RWS() + "/documents/" + docId + "/reports/" + reportId + "/elements/" + elementId + "/dataset?", "GET", null);
         if (document == null) return null;
-        
-		document = document.getJSONObject("dataset");
-		JSONArray elements = JSONHelper.getJSONArrayAlways(document, "row");
+		return document.getJSONObject("dataset");
+    }
 
+    public Map<Integer, JSONObject> getDatasetMetadata(JSONObject dataset) throws Exception {
+    	Map<Integer, JSONObject> resultSet = new HashMap<Integer, JSONObject>();
+		JSONArray values = dataset.getJSONObject("metadata").getJSONArray("value");
+		for (int i=0; i<values.length(); i++) {
+			JSONObject element = values.getJSONObject(i);
+			resultSet.put(i, element);
+		}
+        return resultSet;
+    }
+    
+    public Map<Integer, JSONObject> getDatasetRows(JSONObject dataset) throws Exception {
+    	Map<Integer, JSONObject> resultSet = new HashMap<Integer, JSONObject>();
+		JSONArray elements = dataset.getJSONArray("row");
 		for (int i=0; i<elements.length(); i++) {
 			JSONObject element = elements.getJSONObject(i);
 			resultSet.put(i, element);
@@ -97,10 +107,8 @@ public class WebIReports  {
 			}
 			*/
 		}
-
         return resultSet;
     }
-
 
 
 }

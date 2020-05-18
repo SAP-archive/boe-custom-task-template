@@ -1,0 +1,76 @@
+{
+  "name": "Get WebIntelligence Worklist",
+  "cuid": "ARCw6mSZ73ROtNf6p7QhWEU",
+  "specific_kind": "tt.sample",
+  "parent_id": "",
+  "task_template": {
+    "display_name": "Get WebIntelligence Worklist",
+    "input_param": [
+      {
+        "display_name": "Session",
+        "name": "sessiontoken",
+        "default_value": "@previous_session",
+        "type": "token",
+        "mandatory": true,
+		"description":"Session on the Central Management Server created with Logon to the selected Landscape",
+	    "ux_control": {
+          "type": "combobox",
+		  "visible": false,
+          "lov": [],
+          "lov_source": "prev_task_param",
+          "place_holder": "Select session"
+        }
+      },
+      {
+        "display_name": "Document",
+        "name": "webi_doc",
+        "default_value": "",
+        "type": "csv",
+        "type_info": "id;cuid",
+        "mandatory": true,
+		"description":"WebIntelligence document which contains the source table to compare",
+		"ux_control": {
+          "type": "repoexplorer",
+		   "repoexplorer_property":{
+			 "filter_kind": ["WebI"],
+			 "selection_mode": "single" 
+		  	},
+          "place_holder": "Enter WebIntelligence document available in your BI repository"
+        }
+      },
+      {
+        "display_name": "Report & Table",
+        "name": "report_table",
+        "default_value": "report,table;",
+        "type": "csv",
+        "type_info": "report,table",
+        "mandatory": true,
+        "description": "enter the expected value",
+        "ux_control": {
+          "type": "textbox",
+          "place_holder": "Enter value"
+        }
+      },
+    ],
+    "output_param": [
+      {
+        "display_name": "CSV output",
+        "name": "csv_output",
+        "type": "csv",
+        "type_info": "",
+        "description": "Not equals value rows as CSV"
+      }
+    ],
+    "param_uifile": "",
+    "executable_jarname": {
+      "path": ""
+    },
+    "system_requirement": {
+      "type": "none"
+    },
+    "multiple_execution": false,
+    "help": {
+      "description": "Get the dataset from a WebIntelligence report table as CSV values which can be consumed by subsequent tasks as input."
+    }
+  }
+}

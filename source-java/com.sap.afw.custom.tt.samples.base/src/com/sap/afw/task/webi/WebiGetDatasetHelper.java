@@ -110,7 +110,7 @@ public class WebiGetDatasetHelper {
 			separator = Framework.COL_DELIMITER;
 		}
 		StringBuilder values = new StringBuilder();
-		values.append(header.toString() + Framework.ROW_DELIMITER_CHAR);
+		values.append(header.toString() + Framework.ROW_DELIMITER_NEW_LINE);
 		resultSummary += " header: " + header.toString();
 
 		for (JSONObject element : rows.values()) {

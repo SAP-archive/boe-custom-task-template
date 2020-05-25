@@ -28,6 +28,7 @@ The sample `Scenarios` can be executed using the Automation Framework.
   CompareWebiDatasets | Compare the data from a table in a Web Intelligence document (before and after refresh)  
   CompareRef_WebiDataset | Compare data from a CSV File with data from table in a Web Intelligence document  
   CompareRef_WebiDataset(Changed) | like previous scenario, but reference data was changed
+  GetWebiWorklist-RefreshDocs | Get the worklist of documents from a Web Intelligence report table, refresh the documents
   
 
 
@@ -64,6 +65,7 @@ sap.samples.tt.&lt;name&gt;  | Workflow Template for a Task Template, e.g. `Quer
   Convert String to CSV | Convert input parameter (String) to output parameter (CSV) | &lt;id&gt;base_&lt;version&gt;.jar   
   Compare String | Simple string compare of CSV values  
   Get WebIntelligence Dataset | Get the values from a table in a report of a Web Intelligence document  
+  Get WebIntelligence Worklist | Get the values from a table in a report of a Web Intelligence document as worklist in CSV format
   JavaScript | execute JavaScript code from a document uploaded to a folder in the CMS repository | &lt;id&gt;javascript_&lt;version&gt;.jar  
 
 

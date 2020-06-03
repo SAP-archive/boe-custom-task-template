@@ -1,4 +1,4 @@
-# Automation Framework - Custom Task Template samples
+# Automation Framework - Custom Task Template Samples
 
 ## Description
 SAP BusinessObjects BI [Automation Framework](https://help.sap.com/viewer/55dcdd714f614d1ca77af92b79ff5e44/4.2.5/en-US) allows you to build, manage and run `Scenarios`, from simple to complex operation tasks of your BI platform. 
@@ -64,4 +64,4 @@ This project is provided "as-is": there is no guarantee that raised issues will 
 <a name='license'>
 
 ## License
-Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved. This project is licensed under the SAP Sample Code License, Version 1.0 except as noted otherwise in the LICENSE file.
+Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved. This file is licensed under the Apache Software License, version 2.0 except as noted otherwise in the LICENSE file.

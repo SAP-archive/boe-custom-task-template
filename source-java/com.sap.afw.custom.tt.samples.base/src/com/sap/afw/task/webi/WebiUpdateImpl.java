@@ -20,23 +20,24 @@ import com.sap.bong.common.coretask.base.ITaskOutputValue;
 import com.sap.bong.task.custom.sdk.CustomTaskImpl;
 import com.sap.bong.task.custom.sdk.CustomTaskTemplate;
 
-public class WebiGetDatasetWorklistImpl extends CustomTaskImpl {
+public class WebiUpdateImpl extends CustomTaskImpl {
 
-	private static final ILogger LOG = LoggerManager.getLogger(WebiGetDatasetWorklistImpl.class);
-			
-	public WebiGetDatasetWorklistImpl(CustomTaskTemplate taskTemplate) {
+	private static final ILogger LOG = LoggerManager.getLogger(WebiUpdateImpl.class);
+
+	private WebiUpdateHelper helper;
+
+
+	public WebiUpdateImpl(CustomTaskTemplate taskTemplate) {
 		super(taskTemplate);
 	}
 
-	private WebiGetDatasetHelper helper;
 
 	@Override
 	public TASK_STATUS execute() {
 		
 		try {
-			helper = new WebiGetDatasetHelper(this, true);
-			return helper.workOnReportTable();
-
+			helper = new WebiUpdateHelper(this);
+			return helper.update();
 		} catch (Exception e) {
 			LOG.error(e);
 			return TASK_STATUS.failure;
@@ -45,7 +46,7 @@ public class WebiGetDatasetWorklistImpl extends CustomTaskImpl {
 
 	@Override
 	public JSONObject inputValueInstance() throws JSONException {
-		return new WebiGetDatasetInputValue(this);
+		return new WebiUpdateInputValue(this);
 	}
 
 
@@ -56,7 +57,7 @@ public class WebiGetDatasetWorklistImpl extends CustomTaskImpl {
 			@Override
 			public String getValue(String key) {
 				if (key.startsWith("csv_output")) {
-					return helper.getCsvOutput().replaceAll(Framework.ROW_DELIMITER_NEW_LINE, Framework.ROW_DELIMITER_CHAR);
+					return helper.getCsvOutput();
 				}
 				return null;
 			}
@@ -70,7 +71,9 @@ public class WebiGetDatasetWorklistImpl extends CustomTaskImpl {
 
 	@Override
 	public String resultDetails() {
-		return helper.getCsvOutput(); //resultDetails;
+		// use CR LF to start new line
+		//return "col1,col2,col3\r\n,v11,v12,v13\r\n,v21,v22,v23";
+		return helper.getCsvOutput();
 	}
 }
 

@@ -14,24 +14,19 @@ import com.sap.afw.helper.RESTRequest;
 import com.sap.bong.common.coretask.base.TaskImplCore.TASK_STATUS;
 import com.sap.bong.task.custom.sdk.CustomTaskImpl;
 
-public class WebiGetDatasetHelper {
+public class WebiGetDatasetHelper extends TaskHelper {
 
 	private WebiGetDatasetInputValue inputValue;
-	private BIPJavaSDK bip;
-	private RESTRequest rest;
 
 	private boolean worklist;
-	private String resultSummary;
 	private int docId;
 	private String csvOutput;
 	
 	
 	public WebiGetDatasetHelper(CustomTaskImpl taskImpl, boolean worklist) throws Exception {
+		super(taskImpl);
 		this.worklist = worklist;
 		inputValue = (WebiGetDatasetInputValue) taskImpl.getInputValue();
-		bip = new BIPJavaSDK(taskImpl.getSerializedSession());
-		rest = new RESTRequest();
-		rest.connect(bip);
 	}
 	
 	private void setDocId() throws SDKException {
@@ -46,11 +41,11 @@ public class WebiGetDatasetHelper {
 		if ( (condition.length() == 0) && (parDoc.has("id")) ) {
 			condition = "si_id=" + parDoc.getString("id") + "";
 		}
-		IInfoObjects infoObjects = bip.getInfoStore().query("select si_name, si_cuid, si_id from ci_infoObjects where " + condition);
+		IInfoObjects infoObjects = getBIP().getInfoStore().query("select si_name, si_cuid, si_id from ci_infoObjects where " + condition);
 		IInfoObject infoObject = null;
 		if (infoObjects.size() == 1) infoObject = (IInfoObject)infoObjects.get(0);
 		if (infoObject == null) {
-			resultSummary = "document not found (" + parDoc.toString() + ")";
+			setResultSummary("document not found (" + parDoc.toString() + ")");
 			docId = 0;
 		}
 		docId = infoObject.getID();
@@ -61,10 +56,6 @@ public class WebiGetDatasetHelper {
 		return csvOutput;
 	}
 	
-	public String getResultSummary() {
-		return resultSummary;
-	}
-	
 	public TASK_STATUS workOnReportTable() throws Exception {
 		setDocId();
 		if (docId == 0) {
@@ -72,12 +63,12 @@ public class WebiGetDatasetHelper {
 		}
 		
 		JSONArray reportTableList = inputValue.paramReportTable();
-		resultSummary = "processed ";
+		setResultSummary("processed ");
 		for (int i=0; i<reportTableList.length(); i++) {
 			JSONObject workObj = reportTableList.getJSONObject(i);
 			String report = workObj.getString(WebiGetDatasetInputValue.REPORT).toString();
 			String table = workObj.getString(WebiGetDatasetInputValue.TABLE).toString();
-			WebIReports docReports = new WebIReports(rest);
+			WebIReports docReports = new WebIReports(getRest());
 			
 			// get the list of reports from the WebI document
 			Map<String, Integer> reportList = docReports.requestReportList(docId);
@@ -90,7 +81,7 @@ public class WebiGetDatasetHelper {
 			
 			JSONObject dataSet = docReports.requestReportElementDataset(docId, reportList.get(report), reportElementList.get(table));
 			Map<Integer, JSONObject> rows = docReports.getDatasetRows(dataSet);
-			resultSummary += report + "." + table + " rows:" + rows.values().size();
+			addResultSummary(report + "." + table + " rows:" + rows.values().size());
 
 			if (worklist) {
 				Map<Integer, JSONObject> metadata = docReports.getDatasetMetadata(dataSet);
@@ -111,7 +102,7 @@ public class WebiGetDatasetHelper {
 		}
 		StringBuilder values = new StringBuilder();
 		values.append(header.toString() + Framework.ROW_DELIMITER_NEW_LINE);
-		resultSummary += " header: " + header.toString();
+		setResultSummary("header: " + header.toString());
 
 		for (JSONObject element : rows.values()) {
 			JSONArray row = element.getJSONArray("value");
@@ -120,7 +111,7 @@ public class WebiGetDatasetHelper {
 				values.append(separator + row.get(i).toString());
 				separator = Framework.COL_DELIMITER;
 			}
-			values.append(Framework.ROW_DELIMITER_CHAR);
+			values.append(Framework.ROW_DELIMITER_NEW_LINE);
 		}
 		csvOutput = values.toString();
 	}

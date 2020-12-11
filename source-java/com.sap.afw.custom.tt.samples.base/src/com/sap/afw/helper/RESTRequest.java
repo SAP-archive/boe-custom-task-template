@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.JSONObject;
 
 import com.businessobjects.foundation.logging.ILogger;

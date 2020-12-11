@@ -21,7 +21,7 @@ import com.sap.bong.task.custom.sdk.CustomTaskParamValues;
 import com.sap.bong.task.custom.sdk.CustomTaskPluginActivator;
 import com.sap.bong.task.custom.sdk.CustomTaskTemplate;
 
-public class WebiGetDatasetImplTest {
+public class WebiGetDatasetWorklistImplTest {
 
 	private CustomTaskTemplate taskTemplate;
 	private CustomTaskImpl taskImpl;
@@ -31,7 +31,7 @@ public class WebiGetDatasetImplTest {
     
     private static String USER = "administrator";
     private static String PASSWORD = "Password1";
-    private static String CMS = "localhost";
+    private static String CMS = "adept3399021";
 
     private static final String CRLF = "\r\n";
     
@@ -59,7 +59,7 @@ public class WebiGetDatasetImplTest {
 		taskTemplate.setParamDefs(new TaskParamDefs(taskTemplateJSON));
 
 		// create an instance of the task and set input values for execution
-		taskImpl = new WebiGetDatasetImpl(taskTemplate);
+		taskImpl = new WebiGetDatasetWorklistImpl(taskTemplate);
 //		taskImpl.setParamValues(getTaskParamValues());
 //		assertEquals("task CUID", taskTemplate.getParamDefs().getCUID(), taskImpl.getParamValues().getCUID());
 		
@@ -84,7 +84,7 @@ public class WebiGetDatasetImplTest {
 		// set your input and output parameters - should match your JSON definition of the task template (e.g. sampleTaskTemplate.json)
 		taskParam = taskParam + 
 				"'input_param': {'webi_doc': " + parWebiDoc + ", 'report_table': " + parReportTable + "}," +
-				"'output_param': {'csv_output': ''}}";
+				"'output_param': {'name' : 'csv_output'}}";
 		return new CustomTaskParamValues(new TaskParamValues(new JSONObject(taskParam)));
 	}
 	
@@ -102,7 +102,8 @@ public class WebiGetDatasetImplTest {
 
 		TASK_STATUS exec = taskImpl.execute();
 		assertEquals("Task execution", TASK_STATUS.success, exec);
-		assertEquals("result summary", "processed Tables.Table2 rows:3", taskImpl.resultSummary());
+		assertEquals("result", "Year,Sales revenue,Margin\r\n2014,8.095814e6,3.7319706e6\r\n2015,13.232246e6,5.1878855e6\r\n2016,15.0591428e6,5.6670837e6\r\n", taskImpl.resultDetails());
+		assertEquals("result summary", "header: Year,Sales revenue,Margin", taskImpl.resultSummary());
 	}
 
 

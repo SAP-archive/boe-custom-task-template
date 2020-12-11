@@ -1,0 +1,63 @@
+{
+  "name": "Update WebIntelligence Document",
+  "cuid": "Ab.cAMDByTpJi4L241XXnp8",
+  "specific_kind": "tt.sample",
+  "parent_id": "",
+  "task_template": {
+    "display_name": "Update WebIntelligence Document",
+    "input_param": [
+      {
+        "display_name": "Session",
+        "name": "sessiontoken",
+        "default_value": "@previous_session",
+        "type": "token",
+        "mandatory": true,
+		"description":"Session on the Central Management Server created with Logon to the selected Landscape",
+	    "ux_control": {
+          "type": "combobox",
+		  "visible": false,
+          "lov": [],
+          "lov_source": "prev_task_param",
+          "place_holder": "Select session"
+        }
+      },
+      {
+        "display_name": "Document",
+        "name": "webi_doc",
+        "default_value": "",
+        "type": "csv",
+        "type_info": "id;cuid",
+        "mandatory": true,
+		"description":"WebIntelligence document which should be udpated",
+		"ux_control": {
+          "type": "repoexplorer",
+		   "repoexplorer_property":{
+			 "filter_kind": ["WebI"],
+			 "selection_mode": "multi" 
+		  	},
+          "place_holder": "Enter WebIntelligence document available in your BI repository"
+        }
+      }
+    ],
+    "output_param": [
+      {
+        "display_name": "CSV output",
+        "name": "csv_output",
+        "type": "csv",
+        "type_info": "",
+        "description": "Update document IDs"
+      }
+    ],
+    "param_uifile": "",
+    "executable_jarname": {
+      "path": ""
+    },
+    "system_requirement": {
+      "type": "none"
+    },
+    "multiple_execution": false,
+    "help": {
+      "description": "Update the WebIntelligence document (Open & Save)"
+    }
+  }
+}

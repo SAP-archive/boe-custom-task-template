@@ -21,7 +21,7 @@ import com.sap.bong.task.custom.sdk.CustomTaskParamValues;
 import com.sap.bong.task.custom.sdk.CustomTaskPluginActivator;
 import com.sap.bong.task.custom.sdk.CustomTaskTemplate;
 
-public class WebiGetDatasetImplTest {
+public class WebiUpdateImplTest {
 
 	private CustomTaskTemplate taskTemplate;
 	private CustomTaskImpl taskImpl;
@@ -31,7 +31,7 @@ public class WebiGetDatasetImplTest {
     
     private static String USER = "administrator";
     private static String PASSWORD = "Password1";
-    private static String CMS = "localhost";
+    private static String CMS = "adept3399021";
 
     private static final String CRLF = "\r\n";
     
@@ -59,7 +59,7 @@ public class WebiGetDatasetImplTest {
 		taskTemplate.setParamDefs(new TaskParamDefs(taskTemplateJSON));
 
 		// create an instance of the task and set input values for execution
-		taskImpl = new WebiGetDatasetImpl(taskTemplate);
+		taskImpl = new WebiUpdateImpl(taskTemplate);
 //		taskImpl.setParamValues(getTaskParamValues());
 //		assertEquals("task CUID", taskTemplate.getParamDefs().getCUID(), taskImpl.getParamValues().getCUID());
 		
@@ -83,8 +83,8 @@ public class WebiGetDatasetImplTest {
 		String taskParam = "{'cuid': '" + taskTemplate.getParamDefs().getCUID() + "', 'name': '" + taskTemplate.getParamDefs().getName() + "',";
 		// set your input and output parameters - should match your JSON definition of the task template (e.g. sampleTaskTemplate.json)
 		taskParam = taskParam + 
-				"'input_param': {'webi_doc': " + parWebiDoc + ", 'report_table': " + parReportTable + "}," +
-				"'output_param': {'csv_output': ''}}";
+				"'input_param': {'webi_doc': " + parWebiDoc + "}," +
+				"'output_param': {'sample_output_param': ''}}";
 		return new CustomTaskParamValues(new TaskParamValues(new JSONObject(taskParam)));
 	}
 	
@@ -95,14 +95,13 @@ public class WebiGetDatasetImplTest {
 	 * @throws Exception
 	 */
 	public void test() throws Exception {
-		parWebiDoc = "[{cuid:'AQtkbbSqN4NOj3ydf.Sw1lY'}]";  // ZZ_Multiple Data Sources
-		parReportTable = "[{report: 'Tables', table: 'Table2'}]";
+		parWebiDoc = "[{cuid:'AQtkbbSqN4NOj3ydf.Sw1lY'}, {cuid: 'AW4AVT1AUhVAogA6P7OQv9c'}]";  // ZZ_Multiple Data Sources, ZZ_Charting
 		taskImpl.setParamValues(getTaskParamValues());
-		taskImpl.setInputValue(new WebiGetDatasetInputValue(taskImpl));
+		taskImpl.setInputValue(new WebiUpdateInputValue(taskImpl));
 
 		TASK_STATUS exec = taskImpl.execute();
 		assertEquals("Task execution", TASK_STATUS.success, exec);
-		assertEquals("result summary", "processed Tables.Table2 rows:3", taskImpl.resultSummary());
+		assertEquals("result summary", "processed Documents: 2", taskImpl.resultSummary());
 	}
 
 

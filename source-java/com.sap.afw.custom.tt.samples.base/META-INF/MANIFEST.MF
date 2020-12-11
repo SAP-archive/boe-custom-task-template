@@ -6,7 +6,7 @@ Bundle-Version: 1.0.0
 Bundle-Activator: com.sap.afw.task.Activator
 Bundle-Vendor: SAP
 Import-Package: com.businessobjects.foundation.logging,
- org.apache.commons.lang,
+ org.apache.commons.lang3,
  org.json,
  org.osgi.framework
 Require-Bundle: com.sap.bong.common.coretask;bundle-version="1.0.0",
